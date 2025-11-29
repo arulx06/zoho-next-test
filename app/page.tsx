@@ -1,7 +1,7 @@
 "use client";
 
 export default function Home() {
-  let zohoData = null;
+  let zohoData: any = null;
 
   if (typeof window !== "undefined") {
     const params = new URLSearchParams(window.location.search);
@@ -9,10 +9,13 @@ export default function Home() {
     console.log("Zoho param:", zoho);   // <-- debug
 
     if (zoho) {
+      const decoded = decodeURIComponent(zoho);
       try {
-        zohoData = JSON.parse(decodeURIComponent(zoho));
-      } catch (err) {
-        console.error("Failed to parse Zoho data", err);
+        // Try parsing as JSON
+        zohoData = JSON.parse(decoded);
+      } catch {
+        // If parsing fails, treat it as plain string
+        zohoData = { name: decoded };
       }
     }
   }
