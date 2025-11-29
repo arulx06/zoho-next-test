@@ -6,6 +6,7 @@ export default function Home() {
   if (typeof window !== "undefined") {
     const params = new URLSearchParams(window.location.search);
     const zoho = params.get("zoho");
+    console.log("Zoho param:", zoho);   // <-- debug
 
     if (zoho) {
       try {
@@ -19,11 +20,7 @@ export default function Home() {
   return (
     <div style={{ padding: 20 }}>
       <h1>Zoho Next Test</h1>
-      <pre>
-        {zohoData
-          ? JSON.stringify(zohoData, null, 2)
-          : "No Zoho data received"}
-      </pre>
+      <pre>{zohoData ? JSON.stringify(zohoData, null, 2) : "No Zoho data received"}</pre>
     </div>
   );
 }
